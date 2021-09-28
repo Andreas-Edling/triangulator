@@ -43,7 +43,7 @@ impl DelaunayIncremental {
     pub(crate) fn initial_triangulation(
         &mut self,
         points: &[Point],
-    ) -> Result<Vec<Triangle>, TriangulatorError> {
+    ) -> Result<&[Triangle], TriangulatorError> {
         let (hull, points_inside_hull) = convex_hull(points)?;
         self.points_to_add = points_inside_hull;
 
@@ -57,7 +57,11 @@ impl DelaunayIncremental {
             self.flip_pairs(check_stack, points);
         }
 
-        Ok(self.triangles.clone())
+        Ok(self.get_triangles())
+    }
+
+    pub(crate) fn get_triangles(&self) -> &[Triangle] {
+        self.triangles.as_slice()
     }
 
     pub(crate) fn do_step(&mut self, points: &[Point]) -> bool {

@@ -12,7 +12,7 @@ impl Circle {
         Self { pos, radius_sqr }
     }
 
-    // creates a circle with the triangle vertices on the circumference
+    /// creates a circle with the triangle vertices on the circumference
     pub fn from_triangle(tri: &Triangle, points: &[Point]) -> Self {
         let a = &points[tri.index0];
         let b = &points[tri.index1];

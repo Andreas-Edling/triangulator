@@ -1,3 +1,27 @@
+//! # Triangulator
+//!
+//! Triangulator is a library that creates a Delaunay triangulation, given a set of 2D points.
+//! There are two ways to use the library, either call fn triangulate(..) which will give the final triangulation:
+//!
+//! ```
+//!    use triangulator::*;
+//!    let points = [Point::new(0.,0.), Point::new(1.,0.), Point::new(1.,1.), Point::new(0.,1.), Point::new(0.5,0.5)];
+//!    let triangles = triangulate(&points).unwrap();
+//! ```
+//!
+//! or, for getting transitional triangulations:
+//! ```
+//!    use triangulator::*;
+//!    let points = [Point::new(0.,0.), Point::new(1.,0.), Point::new(1.,1.), Point::new(0.,1.), Point::new(0.5,0.5)];
+//!
+//!    let mut triangulator = Triangulator::new();
+//!    triangulator.initial_triangulation(&points).unwrap();
+//!    while triangulator.do_step(&points) {
+//!        let triangles = triangulator.get_triangles();
+//!        // do something with triangles
+//!    }
+//!```
+
 mod circle;
 mod convex_hull;
 mod delaunay_inc;
@@ -49,7 +73,7 @@ impl Triangulator {
     pub fn initial_triangulation(
         &mut self,
         points: &[Point],
-    ) -> Result<Vec<Triangle>, TriangulatorError> {
+    ) -> Result<&[Triangle], TriangulatorError> {
         if points.len() < 3 {
             return Err(TriangulatorError::TooFewPoints);
         }
@@ -62,7 +86,7 @@ impl Triangulator {
     }
 
     pub fn get_triangles(&self) -> &[Triangle] {
-        self.triangulator.triangles.as_slice()
+        self.triangulator.get_triangles()
     }
 }
 
