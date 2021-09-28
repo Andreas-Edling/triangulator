@@ -1,6 +1,7 @@
 //! # Triangulator
 //!
-//! Triangulator is a library that creates a Delaunay triangulation, given a set of 2D points.
+//! Triangulator is a library that given a set of 2D points, it creates a [Delaunay triangulation](https://en.wikipedia.org/wiki/Delaunay_triangulation). 
+//! ie, it minimizes acuteness of triangles. 
 //! There are two ways to use the library, either call fn triangulate(..) which will give the final triangulation:
 //!
 //! ```
