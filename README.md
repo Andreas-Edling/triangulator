@@ -23,3 +23,9 @@ or, for getting transitional triangulations:
        // do something with triangles
    }
 ```
+
+
+
+Sample of what a triangulation will look like:
+
+![triangulation](https://user-images.githubusercontent.com/11133044/135079563-5bdc6adb-3aae-4e58-aadb-fe833472c39b.gif)
